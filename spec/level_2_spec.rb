@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Level 2: few models methods" do
 
-  describe Intercommunality, type: :model do
+  describe "Intercommunality", type: :model do
 
     let(:subject) do
       Intercommunality.create!(
@@ -43,7 +43,8 @@ RSpec.describe "Level 2: few models methods" do
     end
   end
 
-  describe Commune, type: :model do
+  describe "Commune", type: :model do
+
     describe '.search' do
       let!(:montpellier) { Commune.create(name: 'Montpellier', code_insee: '34172') }
       let!(:baillargues) { Commune.create(name: 'Baillargues', code_insee: '34022') }

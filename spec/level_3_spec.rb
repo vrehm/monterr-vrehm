@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Level 3: controllers" do
 
-  describe CommunesController, type: :controller do
+  describe "CommunesController", type: :controller do
+    def self.described_class
+      CommunesController
+    end
 
     let(:commune) { Commune.create(name: 'Montpellier', code_insee: '34172') }
 

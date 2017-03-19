@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "Level 1: models" do
 
-  describe Commune, type: :model do
+  describe "Commune", type: :model do
+    def self.described_class
+      Commune
+    end
+
     it { is_expected.to belong_to(:intercommunality) }
     it { is_expected.to have_many(:streets) }
 
@@ -13,7 +17,11 @@ RSpec.describe "Level 1: models" do
     it { is_expected.to_not allow_value('172').for(:code_insee) }
   end
 
-  describe Intercommunality, type: :model do
+  describe "Intercommunality", type: :model do
+    def self.described_class
+      Intercommunality
+    end
+
     it { is_expected.to have_many(:communes) }
 
     it { is_expected.to validate_presence_of(:name) }
@@ -26,7 +34,11 @@ RSpec.describe "Level 1: models" do
     it { is_expected.to_not allow_value('24340001700').for(:siren) }
   end
 
-  describe Street, type: :model do
+  describe "Street", type: :model do
+    def self.described_class
+      Street
+    end
+
     it { is_expected.to have_many(:communes) }
 
     it { is_expected.to validate_presence_of(:title) }
