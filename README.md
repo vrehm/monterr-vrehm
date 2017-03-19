@@ -1,24 +1,18 @@
-# README
+# Test de candidature
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Vous voulez rejoindre l'équipe Fiscalité & Territoire ?
 
-Things you may want to cover:
+Afin de d'évaluer rapidement vos connaissances, nous vous proposons de résoudre quelques problèmes de base.
 
-* Ruby version
+Clonez ce repository, lancer les specs et écrivez le code qui permettra de les passer au vert !
 
-* System dependencies
 
-* Configuration
+**Quelques consignes :**
 
-* Database creation
+* Comment lancer les specs ? Hey ! Ca fait parti du test, débrouillez-vous !
 
-* Database initialization
+* On ne touche pas au dossier `spec`, sinon c'est de la triche !
 
-* How to run the test suite
+* Ne forkez pas le repository si vous ne voulez pas partager vos réponses avec d'autres candidats.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Envoyez l'URL de votre repo à [contact@fiscalite-territoire.fr](mailto:contact@fiscalite-territoire.fr) (et accessoirement votre CV, votre lettre de motivation) ! Nous vous recontacterons très vite.
