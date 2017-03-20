@@ -15,4 +15,4 @@ Clonez ce repository, lancer les specs et écrivez le code qui permettra de les 
 
 * Ne forkez pas le repository si vous ne voulez pas partager vos réponses avec d'autres candidats.
 
-* Envoyez l'URL de votre repo à [contact@fiscalite-territoire.fr](mailto:contact@fiscalite-territoire.fr) (et accessoirement votre CV, votre lettre de motivation) ! Nous vous recontacterons très vite.
+* Envoyez l'URL de votre repo à [cto@fiscalite-territoire.fr](mailto:cto@fiscalite-territoire.fr) (et accessoirement votre CV, votre lettre de motivation) ! Nous vous recontacterons très vite.
