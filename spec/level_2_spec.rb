@@ -49,23 +49,20 @@ RSpec.describe "Level 2: few models methods" do
       let!(:montpellier) { Commune.create(name: 'Montpellier', code_insee: '34172') }
       let!(:baillargues) { Commune.create(name: 'Baillargues', code_insee: '34022') }
       let!(:vendargues)  { Commune.create(name: 'Vendargues' , code_insee: '34327') }
+      let!(:perols)      { Commune.create(name: 'Pérols'     , code_insee: '34327') }
 
       it "searches through communes by their name" do
         results = Commune.search('Montpellier')
 
         expect(results.size).to eq(1)
         expect(results).to include(montpellier)
-        expect(results).to_not include(baillargues)
-        expect(results).to_not include(vendargues)
       end
 
       it "searches with insensitive case" do
-        results = Commune.search('MoNTPelLIER')
+        results = Commune.search('PÉROLS')
 
         expect(results.size).to eq(1)
-        expect(results).to include(montpellier)
-        expect(results).to_not include(baillargues)
-        expect(results).to_not include(vendargues)
+        expect(results).to include(perols)
       end
 
       it "searches with partial name" do
@@ -74,16 +71,12 @@ RSpec.describe "Level 2: few models methods" do
         expect(results.size).to eq(2)
         expect(results).to include(baillargues)
         expect(results).to include(vendargues)
-        expect(results).to_not include(montpellier)
       end
 
       it "searches and escapes special characters" do
         results = Commune.search('%argue')
 
         expect(results.size).to eq(0)
-        expect(results).to_not include(baillargues)
-        expect(results).to_not include(vendargues)
-        expect(results).to_not include(montpellier)
       end
 
       it "is chainable" do
