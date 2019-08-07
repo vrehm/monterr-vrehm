@@ -1,8 +1,8 @@
 # Test de candidature
 
-Vous voulez rejoindre l'équipe Fiscalité & Territoire ?
+Vous voulez rejoindre l'équipe Mon Territoire ?
 
-Afin de d'évaluer rapidement vos connaissances, nous vous proposons de résoudre quelques problèmes de base.
+Afin de d'évaluer rapidement vos qualités, nous vous proposons de résoudre quelques problèmes de base.
 
 Clonez ce repository, lancer les specs et écrivez le code qui permettra de les passer au vert !
 
@@ -13,6 +13,6 @@ Clonez ce repository, lancer les specs et écrivez le code qui permettra de les 
 
 * On ne touche pas au dossier `spec`, sinon c'est de la triche !
 
-* Ne forkez pas le repository si vous ne voulez pas partager vos réponses avec d'autres candidats.
+* Ne forkez pas le repository !
 
-* Envoyez l'URL de votre repo à [cto@fiscalite-territoire.fr](mailto:cto@fiscalite-territoire.fr) (et accessoirement votre CV, votre lettre de motivation) ! Nous vous recontacterons très vite.
+* Envoyez l'URL de votre repo à [cto@mon-territoire.fr](mailto:cto@mon-territoire.fr) (et accessoirement votre CV, votre lettre de motivation) ! Nous vous recontacterons très vite.
