@@ -13,6 +13,4 @@ Clonez ce repository, lancer les specs et écrivez le code qui permettra de les 
 
 * On ne touche pas au dossier `spec`, sinon c'est de la triche !
 
-* Ne forkez pas le repository !
-
 * Envoyez l'URL de votre repo à [cto@mon-territoire.fr](mailto:cto@mon-territoire.fr) (et accessoirement votre CV, votre lettre de motivation) ! Nous vous recontacterons très vite.
