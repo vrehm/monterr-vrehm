@@ -19,7 +19,7 @@ RSpec.describe "Level 1: models" do
 
   describe "Intercommunality", type: :model do
     def self.described_class
-      Intercommunality.new(name: 'Communauté d\'agglomération', siren: '123456789')
+      Intercommunality.new(name: 'Communauté d\'agglomération', siren: '123456789', slug: 'communaute-d-agglomeration')
     end
 
     it { is_expected.to have_many(:communes) }

@@ -3,7 +3,8 @@ class Intercommunality < ApplicationRecord
   validates :name, :siren, :slug, presence: true
   validates :siren, uniqueness: {case_sensitive: false}, format: {with: /\A\d{9}\z/}
   validates :form, inclusion: {in: %w[ca cu cc met]}
-  before_save :generate_slug
+  before_validation :generate_slug, on: :create
+  before_validation :update_slug, on: :update
 
   def communes_hash
     communes.pluck(:code_insee, :name).to_h
@@ -13,5 +14,9 @@ class Intercommunality < ApplicationRecord
 
   def generate_slug
     self.slug = name.parameterize if name.present?
+  end
+
+  def update_slug
+    self.slug = name.parameterize if name.present? && !slug.present?
   end
 end

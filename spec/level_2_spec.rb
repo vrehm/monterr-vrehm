@@ -44,12 +44,13 @@ RSpec.describe "Level 2: few models methods" do
   end
 
   describe "Commune", type: :model do
+    let!(:met) { Intercommunality.create(name: 'Montpellier Métropole', form: 'met', siren: '243400017') }
 
     describe '.search' do
-      let!(:montpellier) { Commune.create(name: 'Montpellier', code_insee: '34172') }
-      let!(:baillargues) { Commune.create(name: 'Baillargues', code_insee: '34022') }
-      let!(:vendargues)  { Commune.create(name: 'Vendargues' , code_insee: '34327') }
-      let!(:perols)      { Commune.create(name: 'Pérols'     , code_insee: '34327') }
+      let!(:montpellier) { Commune.create(name: 'Montpellier', code_insee: '34172', intercommunality: met) }
+      let!(:baillargues) { Commune.create(name: 'Baillargues', code_insee: '34022', intercommunality: met) }
+      let!(:vendargues)  { Commune.create(name: 'Vendargues' , code_insee: '34327', intercommunality: met) }
+      let!(:perols)      { Commune.create(name: 'Pérols'     , code_insee: '34198', intercommunality: met) }
 
       it "searches through communes by their name" do
         results = Commune.search('Montpellier')
@@ -89,9 +90,9 @@ RSpec.describe "Level 2: few models methods" do
 
     describe '.to_hash' do
       it "returns a hash with :code_insee in keys and :name in values" do
-        Commune.create(name: 'Montpellier', code_insee: '34172')
-        Commune.create(name: 'Baillargues', code_insee: '34022')
-        Commune.create(name: 'Vendargues' , code_insee: '34327')
+        Commune.create(name: 'Montpellier', code_insee: '34172', intercommunality: met)
+        Commune.create(name: 'Baillargues', code_insee: '34022', intercommunality: met)
+        Commune.create(name: 'Vendargues' , code_insee: '34327', intercommunality: met)
 
         expect(Commune.to_hash).to eq({
           '34022' => 'Baillargues',
