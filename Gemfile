@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 6.1.7'
 gem 'sqlite3'
-gem 'puma', '~> 3.0'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug', platform: :mri
