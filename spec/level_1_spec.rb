@@ -51,5 +51,12 @@ RSpec.describe "Level 1: models" do
       expect(street.errors).to be_include(:to)
       expect(street.errors).to_not be_include(:from)
     end
+
+    it "validate that :to could be equals to :from, ie there is only one number" do
+      street = Street.create(title: 'Rue Test', from: 1, to: 1)
+      expect(street).to be_valid
+      expect(street.errors).to_not be_include(:to)
+      expect(street.errors).to_not be_include(:from)
+    end
   end
 end
