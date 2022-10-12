@@ -19,7 +19,7 @@ RSpec.describe "Level 1: models" do
 
   describe "Intercommunality", type: :model do
     def self.described_class
-      Intercommunality
+      Intercommunality.new(name: 'Communauté d\'agglomération', siren: '123456789')
     end
 
     it { is_expected.to have_many(:communes) }
@@ -49,6 +49,13 @@ RSpec.describe "Level 1: models" do
       street = Street.create(title: 'Rue Lemmy Kilmister', from: 666, to: 4)
       expect(street).to be_new_record
       expect(street.errors).to be_include(:to)
+      expect(street.errors).to_not be_include(:from)
+    end
+
+    it "validate that :to could be equals to :from, ie there is only one number" do
+      street = Street.create(title: 'Rue Test', from: 1, to: 1)
+      expect(street).to be_valid
+      expect(street.errors).to_not be_include(:to)
       expect(street.errors).to_not be_include(:from)
     end
   end

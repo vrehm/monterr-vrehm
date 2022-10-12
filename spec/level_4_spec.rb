@@ -58,7 +58,7 @@ RSpec.describe "Level 4: manipulating data" do
       expect(metropole.population).to eq(449026)
     end
 
-    it "avoids doublons when running twice" do
+    it "avoids duplicates when running third times" do
       2.times { ImportJob.perform_now(csv) }
 
       expect(Intercommunality.count).to eq(3)
