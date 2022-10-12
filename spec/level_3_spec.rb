@@ -1,73 +1,57 @@
 require 'rails_helper'
 
-RSpec.describe "Level 3: controllers" do
+RSpec.describe "Level 3: controllers", type: :request do
+  subject { response }
 
-  describe "CommunesController", type: :controller do
-    def self.described_class
-      CommunesController
-    end
-
-    let(:commune) { Commune.create(name: 'Montpellier', code_insee: '34172') }
+  describe "Communes requests"  do
+    let(:met) { Intercommunality.create(name: "Métropole", siren: "123456789", form: "met") }
+    let(:commune) { Commune.create(name: 'Montpellier', code_insee: '34172', intercommunality: met) }
 
     describe "#index" do
       it "responds with success in JSON" do
-        expect(
-          get(:index, format: :json)
-        ).to have_http_status(:success)
+        get("/communes")
+        expect(response).to have_http_status(:success)
       end
 
       it "is not acceptable in HTML" do
-        expect(
-          get(:index, format: :html)
-        ).to have_http_status(:not_acceptable)
+        get("/communes.html")
+        expect(response).to have_http_status(:not_acceptable)
       end
     end
 
     describe '#create' do
       it "is forbidden" do
-        expect(
-          post(:create)
-        ).to have_http_status(:forbidden)
+        post("/communes")
+        expect(response).to have_http_status(:forbidden)
       end
     end
 
     describe "#show" do
       it "requires :code_insee to identify resource" do
-        expect(
-          get(:show, params: { id: commune.id })
-        ).to have_http_status(:not_found)
+        get("/communes/#{commune.id}")
+        expect(response).to have_http_status(:not_found)
       end
 
       it "responds with success" do
-        expect(
-          get(:show, params: { id: commune.code_insee })
-        ).to have_http_status(:success)
+        get("/communes/#{commune.code_insee}")
+        expect(response).to have_http_status(:success)
       end
     end
 
     describe "#update" do
       it "requires :code_insee to identify resource" do
-        expect(
-          put(:update, params: { id: commune.id })
-        ).to have_http_status(:not_found)
+        put("/communes/#{commune.id}")
+        expect(response).to have_http_status(:not_found)
       end
 
       it "requires attributes to update" do
-        expect(
-          put(:update, params: { id: commune.code_insee })
-        ).to have_http_status(:bad_request)
+        put("/communes/#{commune.code_insee}")
+        expect(response).to have_http_status(:bad_request)
       end
 
       it "updates the resource and responds with empty response" do
-        expect(
-          put(:update, params: {
-            id: commune.code_insee,
-            commune: {
-              name: "Commune de Montpellier"
-            }
-          })
-        ).to have_http_status(:no_content)
-
+        put("/communes/#{commune.code_insee}", params: { commune: {name: "Commune de Montpellier"} })
+        expect(response).to have_http_status(:no_content)
         expect{ commune.reload }.to change(commune, :name).to("Commune de Montpellier")
       end
     end
