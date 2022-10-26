@@ -3,7 +3,7 @@ class Commune < ApplicationRecord
   has_many :commune_streets
   has_many :streets, through: :commune_streets
   validates :name, :code_insee, presence: true
-  validates :code_insee, format: {with: /\A\d{5}\z/}
+  validates :code_insee, uniqueness: true, format: {with: /(\d{5})|(\d{1}(A|B)\d{3})/}
 
   scope :search, ->(query) { where("name LIKE ?", "%#{sanitize_sql_like(query.downcase)}%") }
 

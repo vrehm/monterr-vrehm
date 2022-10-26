@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_10_12_121627) do
     t.integer "intercommunality_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["code_insee"], name: "index_communes_on_code_insee"
+    t.index ["code_insee"], name: "index_communes_on_code_insee", unique: true
     t.index ["intercommunality_id"], name: "index_communes_on_intercommunality_id"
   end
 

@@ -8,6 +8,6 @@ class CreateCommunes < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :communes, :code_insee
+    add_index :communes, :code_insee, unique: true
   end
 end
