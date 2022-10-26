@@ -3,18 +3,22 @@ require "csv"
 class ImportJob < ApplicationJob
   queue_as :default
 
-  def perform(csv)
+  def perform(csv, **options)
+    options = options.merge({headers: true, header_converters: :symbol})
+    options = options.merge({ col_sep: ";" }) unless options[:col_sep]
+    options = options.merge({ encoding: "ISO-8859-1" }) unless options[:encoding]
     intercommunalities, communes = {}, {}
     
-    CSV.foreach(csv, headers: true, col_sep: ";", encoding: "ISO-8859-1", header_converters: :symbol) do |row|
-    # CSV.foreach(csv, headers: true, col_sep: ",", encoding: "UTF-8", header_converters: :symbol) do |row|
+    CSV.foreach(csv, **options) do |row|
+      time = Time.zone.now
+
       intercommunalities[row[:siren_epci]] ||= {
         siren: row[:siren_epci],
         name: row[:nom_complet],
         form: row[:form_epci].downcase.gsub("metro", "met"),
         slug: row[:nom_complet].parameterize,
-        created_at: Time.now,
-        updated_at: Time.now,
+        created_at: time,
+        updated_at: time,
         population: 0
       }
 
@@ -23,14 +27,14 @@ class ImportJob < ApplicationJob
         name: row[:nom_com],
         population: row[:pop_total],
         intercommunality_id: nil,
-        created_at: Time.now,
-        updated_at: Time.now,
+        created_at: time,
+        updated_at: time,
         siren_epci: row[:siren_epci] 
       }
     end
 
     Intercommunality.upsert_all(intercommunalities.values, unique_by: :siren)
-    inter_db = Intercommunality.all.pluck(:siren, :id).to_h
+    inter_db = Intercommunality.pluck(:siren, :id).to_h
     
     communes.values.each do |commune|
       commune[:intercommunality_id] = inter_db[commune[:siren_epci]]
@@ -38,11 +42,13 @@ class ImportJob < ApplicationJob
     end
     Commune.upsert_all(communes.values, unique_by: :code_insee)
 
+    pop_calculation = Commune.group(:intercommunality_id).sum(:population)
+
     intercommunalities.each do |siren, intercommunality|
       id = inter_db[siren]
-      population = Intercommunality.where(id: id).includes(:communes).sum("communes.population")
+      population = pop_calculation[id]
       intercommunality[:population] = population
-      intercommunality[:updated_at] = Time.now
+      intercommunality[:updated_at] = Time.zone.now
     end
 
     Intercommunality.upsert_all(intercommunalities.values, unique_by: :siren)
